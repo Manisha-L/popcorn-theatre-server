@@ -4,9 +4,9 @@ import json
 import math
 import time
 import sys
-sys.path.append('CollaborativeFiltering/')
-from SimpleUserCF import runUserColaborativeFiltering
-from SimpleItemCF import runItemBasedColaborativeFiltering
+sys.path.append('Approach/')
+from NewUser import runUserColaborativeFiltering
+from NewItem import runItemBasedColaborativeFiltering
 from flask_cors import CORS
 
 # init app

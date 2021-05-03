@@ -1,7 +1,7 @@
 
 
 import sys
-sys.path.append('CollaborativeFiltering/')    # read this for how to import from diff floders https://stackoverflow.com/a/33773635/11925194
+sys.path.append('Approach/')    # read this for how to import from diff floders https://stackoverflow.com/a/33773635/11925194
 from MovieLens import MovieLens
 from surprise import KNNBasic
 import heapq
