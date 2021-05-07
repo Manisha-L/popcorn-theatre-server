@@ -6,7 +6,7 @@ import time
 import sys
 sys.path.append('Approach/')
 from NewUser import runUserColaborativeFiltering
-from NewItem import runItemBasedColaborativeFiltering
+from NewItem import runItemBasedFiltering
 from flask_cors import CORS
 
 # init app
@@ -112,10 +112,10 @@ def colaborativeFilering_UserBased(user_ratings, userID="672"):
         recommendations_tmdb.append(get_tmdbID_from_movielensTD(int(recommendation)))
     return recommendations_tmdb
 
-def colaborativeFiltering_ItemBased(user_ratings, userID="672"):
+def contentFiltering_ItemBased(user_ratings, userID="672"):
     # the ids returned are from the movielens dataset
     print('ven checks user id', userID)
-    recommendatons_movieLens = runItemBasedColaborativeFiltering(testSubject=str(userID))
+    recommendatons_movieLens = runItemBasedFiltering(testSubject=str(userID))
     print(recommendatons_movieLens)
     recommendations_tmdb = []
     for recommendation in recommendatons_movieLens:
@@ -148,8 +148,8 @@ def user_colaborativefiltering() :
     return jsonify(recommendations)
     
     
-@app.route("/recommendations/itemcolaborativefiltering", methods=["POST"])
-def item_colaborativefiltering():
+@app.route("/recommendations/itemfiltering", methods=["POST"])
+def item_filtering():
     userID = request.json["userID"]
     user_ratings = request.json["ratings"]
     recommender_type = request.json["recommender_type"]
@@ -161,7 +161,7 @@ def item_colaborativefiltering():
     print("user Rating in tuple format = ", user_ratings)
     userID = add_user_to_dataset(userID, user_ratings)
     print("ven checks userId before passing to Itemfilter", request.json["userID"])
-    recommendations = colaborativeFiltering_ItemBased(user_ratings, userID)
+    recommendations = contentFiltering_ItemBased(user_ratings, userID)
     print(recommendations)
     reset_files()
     return jsonify(recommendations)
